@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechFest - Contact</title>
+    <!-- <link rel="stylesheet" href="style.css"> -->.
+     <style>
+        /* Basic Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f9;
+    color: #333;
+    line-height: 1.6;
+}
+
+/* Navbar Styles */
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: #333;
+    padding: 10px 0;
+    z-index: 100;
+}
+
+.navbar ul {
+    list-style-type: none;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.navbar ul li {
+    margin: 0 20px;
+}
+
+.navbar ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+    transition: color 0.3s ease-in-out;
+}
+
+.navbar ul li a:hover {
+    color: #ff6347; /* Accent color */
+}
+
+.logo {
+    height: 50px;
+}
+
+/* Contact Section */
+.contact-section {
+    padding: 50px 20px;
+    text-align: center;
+    background-color: #fff;
+}
+
+.contact-section h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+.coordinator {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 20px 0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.coordinator h3 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+
+.coordinator p {
+    font-size: 1.1rem;
+    margin-bottom: 8px;
+}
+
+/* Footer */
+footer {
+    padding: 20px;
+    background-color: #333;
+    color: white;
+    text-align: center;
+}
+
+footer .personal-photo {
+    width: 100px;
+    border-radius: 50%;
+    margin: 20px 0;
+}
+
+footer p {
+    font-size: 1.2rem;
+    margin-top: 10px;
+}
+
+/* Bottom Social Media Bar */
+.bottom-navbar {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: #333;
+    padding: 10px 0;
+    text-align: center;
+}
+
+.bottom-navbar ul {
+    list-style-type: none;
+    display: flex;
+    justify-content: center;
+}
+
+.bottom-navbar ul li {
+    margin: 0 15px;
+}
+
+.bottom-navbar ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 1.2rem;
+}
+
+.bottom-navbar ul li a:hover {
+    color: #ff6347;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .navbar ul {
+        flex-direction: column;
+    }
+
+    .contact-section {
+        padding: 30px 10px;
+    }
+
+    .coordinator {
+        padding: 15px;
+        margin: 15px 0;
+    }
+}
+
+     </style>
+</head>
+<body>
+
+    <!-- Top Fixed Navbar -->
+    <header class="navbar">
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="events.html">Events</a></li>
+                <img src="./techlogo-removebg-preview.png" alt="TechFest Logo" class="logo">
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Coordinators and Contacts -->
+    <section class="contact-section">
+        <h2>Contact the Coordinators</h2>
+
+        <div class="coordinator">
+            <h3>Coordinator 1</h3>
+            <p>Name: John Doe</p>
+            <p>Designation: Event Manager</p>
+            <p>Contact: +91 1234567890</p>
+        </div>
+
+        <!-- Repeat for other coordinators -->
+
+    </section>
+    <!-- registration form -->
+     
+
+    <script src="script.js"></script>
+</body>
+</html>

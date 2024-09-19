@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechFest - Home</title>
+    <style>
+        /* Basic Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* Navbar Styles (remains unchanged) */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: #333;
+            padding: 10px 0;
+            z-index: 100;
+        }
+
+        .navbar ul {
+            list-style-type: none;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+
+        .navbar ul li {
+            margin: 0 20px;
+        }
+
+        .navbar ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+            transition: color 0.3s ease-in-out;
+        }
+
+        .navbar ul li a:hover {
+            color: #ff6347; /* Accent color */
+        }
+
+        .logo {
+            height: 50px;
+        }
+
+        /* Welcome Section */
+        .welcome-section {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #ff7e5f, #feb47b);
+            color: white;
+            text-align: center;
+        }
+
+        .welcome-heading {
+            font-size: 3rem;
+            animation: fadeIn 1.5s ease-in-out;
+        }
+
+        .subheading {
+            font-size: 1.5rem;
+            margin-top: 10px;
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        .scroll-down p {
+            margin-top: 30px;
+            font-size: 1.2rem;
+            animation: bounce 2s infinite;
+        }
+
+        /* Keyframe Animation */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* Words of Participants Section */
+        .participants-section {
+            padding: 50px 20px;
+            text-align: center;
+            background-color: #fff;
+        }
+
+        .participants-section h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        .content-wrapper {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            margin-top: 30px;
+        }
+
+        .content-wrapper .left,
+        .content-wrapper .right {
+            flex: 1;
+            padding: 10px;
+        }
+
+        .content-wrapper iframe {
+            border: none;
+        }
+
+        /* Our Reach Section */
+        .our-reach {
+            padding: 50px 20px;
+            background-color: #333;
+            text-align: center;
+            color: #f4f4f9;
+        }
+
+        .reach-stats {
+            display: flex;
+            
+            justify-content: space-around;
+            margin-top: 20px;
+        }
+
+        .reach-stats .stat {
+            background-color: #ff7e5f;
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            width: 200px;
+            transition: transform 0.3s ease;
+        }
+
+        .reach-stats .stat:hover {
+            transform: scale(1.1);
+        }
+
+        .reach-stats h3 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        /* History Section with Carousel */
+        .history {
+            padding: 50px 20px;
+            text-align: center;
+            background-color: #fff;
+            
+        }
+
+        .carousel {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            margin: auto;
+            overflow: hidden;
+        }
+
+        .slides {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .slides img {
+            width: 100%;
+            border-radius: 10px;
+        }
+
+        .prev, .next {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+        }
+
+        .prev {
+            left: 10px;
+        }
+
+        .next {
+            right: 10px;
+        }
+
+        /* Footer */
+        footer {
+            padding: 20px;
+            background-color: #ff7e5f;
+            color: white;
+            text-align: center;
+        }
+
+        footer .personal-photo {
+            width: 100px;
+            border-radius: 50%;
+            margin: 20px 0;
+        }
+
+        footer p {
+            font-size: 1.2rem;
+            margin-top: 10px;
+        }
+
+        /* Bottom Social Media Bar */
+        .bottom-navbar {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background-color: #333;
+            padding: 10px 0;
+            text-align: center;
+        }
+
+        .bottom-navbar ul {
+            list-style-type: none;
+            display: flex;
+            justify-content: center;
+        }
+
+        .bottom-navbar ul li {
+            margin: 0 15px;
+        }
+
+        .bottom-navbar ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.2rem;
+        }
+
+        .bottom-navbar ul li a:hover {
+            color: #ff6347;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .content-wrapper {
+                flex-direction: column;
+            }
+
+            .reach-stats {
+                flex-direction: column;
+                align-items: center;
+              
+                
+            }
+
+            .slides img {
+                width: 100%;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- Top Fixed Navbar -->
+    <header class="navbar">
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="events.html">Events</a></li>
+                <img src="./techlogo-removebg-preview.png" alt="TechFest Logo" class="logo">
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Welcome Section with Animation -->
+    <section class="welcome-section">
+        <h1 class="welcome-heading">Welcome to TechFest 2024</h1>
+        <p class="subheading">A celebration of technology, innovation, and creativity</p>
+        <div class="scroll-down">
+            <p>Scroll Down</p>
+        </div>
+    </section>
+
+    <!-- Words of Participants -->
+    <section class="participants-section">
+        <h2>Words of Participants</h2>
+        <div class="content-wrapper">
+            <div class="left">
+                <iframe width="100%" height="300px" src="https://www.youtube.com/embed/k0fOIdNtFFw"></iframe>
+            </div>
+            <div class="right">
+                <p>
+                  Welcome to the Official Website of the 28th Edition of Techfest, Asia's Largest Science and Technology Festival! We, the students of IIT Bombay, have been passionately working over the past few months to bring you an unforgettable experience at Techfest 2024-2025. This year's edition is packed with a wide array of events, promising an exhilarating journey that will leave a lasting impression. Your adventure begins right here on this website! Explore all the available avenues to ensure you don't miss a moment of the excitement and innovation that awaits you at Techfest 2024-25
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Our Reach Section with Animations -->
+    <section class="our-reach">
+        <h1>Our Reach</h1>
+        <div class="reach-stats">
+            <div class="stat">
+                <h3>10,000+</h3>
+                <p>Visitors</p>
+            </div>
+            <br>
+            <br>
+            <div class="stat">
+                <h3>500+</h3>
+                <p>Participants</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- History Section with Carousel -->
+    <section class="history">
+        <h1>History</h1>
+        <div class="carousel">
+            <div class="slides">
+                <img src="./techlogo-removebg-preview.png" alt="History Image 1">
+                <img src="./collage bg.png" alt="History Image 2">
+                <img src="./techlogo-removebg-preview.png" alt="History Image 3">
+            </div>
+            <button class="prev" onclick="moveSlide(-1)">&#10094;</button>
+            <button class="next" onclick="moveSlide(1)">&#10095;</button>
+        </div>
+    </section>
+
+    <!-- Footer with Contact Info -->
+    <footer>
+        <div class="contact-info">
+            <h3>Name:Mukesh Das</h3>
+            <p>Registration No:2301292520</p>
+            <p>Email: dasm57306@gmail.com</p>
+            <p>Contact: +91 7846896259</p>
+            <img src="your-photo.jpg" alt="Your Photo" class="personal-photo">
+        </div>
+        <p>Thank You for visiting TechFest 2024!</p>
+    </footer>
+
+    <!-- Bottom Fixed Social Media Bar -->
+    <div class="bottom-navbar">
+        <ul>
+            <li><a href="https://facebook.com" target="_blank">Facebook</a></li>
+            <li><a href="https://twitter.com" target="_blank">Twitter</a></li>
+            <li><a href="https://instagram.com" target="_blank">Instagram</a></li>
+            <li><a href="results.html">Results</a></li>
+        </ul>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slides img');
+        const totalSlides = slides.length;
+
+        function showSlide(slideIndex) {
+            const slidesContainer = document.querySelector('.slides');
+            if (slideIndex >= totalSlides) {
+                currentSlide = 0;
+            } else if (slideIndex < 0) {
+                currentSlide = totalSlides - 1;
+            } else {
+                currentSlide = slideIndex;
+            }
+            slidesContainer.style.transform = `translateX(-${currentSlide * 100}%)`;
+        }
+
+        function moveSlide(step) {
+            showSlide(currentSlide + step);
+        }
+
+        // Auto-slide every 3 seconds
+        setInterval(() => {
+            moveSlide(1);
+        }, 3000);
+    </script>
+</body>
+</html>
+
+
+
+
+

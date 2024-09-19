@@ -1,0 +1,925 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>techfest-result</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 20px;
+    }
+     /* Navbar Styles (remains unchanged) */
+     .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: #333;
+            padding: 10px 0;
+            z-index: 100;
+        }
+
+        .navbar ul {
+            list-style-type: none;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+
+        .navbar ul li {
+            margin: 0 20px;
+        }
+
+        .navbar ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+            transition: color 0.3s ease-in-out;
+        }
+
+        .navbar ul li a:hover {
+            color: #ff6347; /* Accent color */
+        }
+
+        .logo {
+            height: 50px;
+        }
+
+    /* Search Bar Styling */
+    .search-bar {
+      width: 100%;
+      margin: 20px auto;
+      margin-top: 100px;
+      text-align: center;
+    }
+
+    .search-bar input[type="text"] {
+      width: 60%;
+      padding: 10px;
+      border-radius: 20px;
+      border: 2px solid #333;
+      font-size: 1rem;
+    }
+
+    .search-bar input[type="text"]:focus {
+      outline: none;
+      border-color: #ff6347;
+    }
+
+    /* Button Styling */
+    .dropdown-btn {
+      background-color: #ff6347;
+      color: white;
+      padding: 10px;
+      border: none;
+      cursor: pointer;
+      width: 80%;
+      display: block;
+      font-size: 1rem;
+      margin: 10px auto;
+      border-radius: 20px;
+      transition: background-color 0.3s ease-in-out;
+    }
+
+    .dropdown-btn:hover {
+      background-color: #e5533f;
+    }
+
+    /* Dropdown Content */
+    .dropdown-content {
+      display: none;
+      background-color: #333;
+      padding: 10px;
+      margin-top: 5px;
+      border-radius: 5px;
+      overflow-x: auto; /* Allow horizontal scroll on small screens */
+    }
+
+    /* Table Styling */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 10px 0;
+    }
+
+    table, th, td {
+      border: 1px solid #fff;
+    }
+
+    th, td {
+      padding: 10px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #ff6347;
+      color: white;
+    }
+
+    td {
+      background-color: #333;
+      color: white;
+    }
+
+    /* Result Cards Section */
+    .result-cards {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+      padding: 20px;
+      margin-top: 20px;
+    }
+
+    .result-card {
+      background-color: #fff;
+      width: 250px;
+      margin: 15px;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease;
+    }
+
+    .result-card:hover {
+      transform: scale(1.05);
+    }
+
+    .result-card img {
+      width: 100%;
+      height: 150px;
+      object-fit: cover;
+    }
+
+    .result-card h3 {
+      margin: 10px;
+      font-size: 1.5rem;
+      color: #333;
+      text-align: center;
+    }
+
+    /* Responsive Design */
+    @media screen and (max-width: 600px) {
+      th, td {
+        padding: 8px;
+        font-size: 14px;
+      }
+    }
+  </style>
+</head>
+<body>
+    <!-- Top Fixed Navbar -->
+    <header class="navbar">
+      <nav>
+          <ul>
+              <li><a href="index.html">Home</a></li>
+              <li><a href="events.html">Events</a></li>
+              <img src="./techlogo-removebg-preview.png" alt="TechFest Logo" class="logo">
+              <li><a href="about.html">About</a></li>
+              <li><a href="contact.html">Contact</a></li>
+          </ul>
+      </nav>
+  </header>
+
+  <!-- Search Bar -->
+  <div class="search-bar">
+    <input type="text" id="search-input" onkeyup="searchResults()" placeholder="Search results...">
+  </div>
+
+  <!-- Result Cards -->
+  <section class="result-cards" id="result-cards">
+    <div class="result-card">
+      <img src="" alt="">
+      <h3>Run the Key</h3>
+      <button class="dropdown-btn" onclick="toggleDropdown(this)">Show Table</button>
+      <div class="dropdown-content">
+        <table>
+          <thead>
+            <tr>
+              <th>Priliminary Round</th>
+              <th>Resistration No</th>
+              <th>Final Round</th>
+              <th>Resistration No</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Mukesh Das</td>
+              <td>2301292520</td>
+              <td>Abdul Rahim Khan</td>
+              <td>2301292480</td>
+            </tr>
+            <tr>
+              <td>Abdul Rahim Khan</td>
+              <td>56789567845</td>
+              <td>Mukesh Das</td>
+              <td>123456789</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="result-card">
+      <img src="" alt="">
+      <h3>Code Sprint</h3>
+      <button class="dropdown-btn" onclick="toggleDropdown(this)">Show Table</button>
+      <div class="dropdown-content">
+        <table>
+          <thead>
+            <tr>
+              <th>Priliminary Round</th>
+              <th>Resistration No</th>
+              <th>Final Round</th>
+              <th>Resistration No</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>John Doe</td>
+              <td>4567891234</td>
+              <td>Jane Smith</td>
+              <td>123456789</td>
+            </tr>
+             <tr>
+              <td>Mukesh Das</td>
+              <td>2301292520</td>
+              <td>Abdul Rahim Khan</td>
+              <td>2301292480</td>
+            </tr>
+            
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="result-card">
+      <img src="" alt="">
+      <h3>Run the Key</h3>
+      <button class="dropdown-btn" onclick="toggleDropdown(this)">Show Table</button>
+      <div class="dropdown-content">
+        <table>
+          <thead>
+            <tr>
+              <th>Priliminary Round</th>
+              <th>Resistration No</th>
+              <th>Final Round</th>
+              <th>Resistration No</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Mukesh Das</td>
+              <td>2301292520</td>
+              <td>Abdul Rahim Khan</td>
+              <td>2301292480</td>
+            </tr>
+            <tr>
+              <td>Abdul Rahim Khan</td>
+              <td>56789567845</td>
+              <td>Mukesh Das</td>
+              <td>123456789</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="result-card">
+      <img src="" alt="">
+      <h3>Code Sprint</h3>
+      <button class="dropdown-btn" onclick="toggleDropdown(this)">Show Table</button>
+      <div class="dropdown-content">
+        <table>
+          <thead>
+            <tr>
+              <th>Priliminary Round</th>
+              <th>Resistration No</th>
+              <th>Final Round</th>
+              <th>Resistration No</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>John Doe</td>
+              <td>4567891234</td>
+              <td>Jane Smith</td>
+              <td>123456789</td>
+            </tr>
+             <tr>
+              <td>Mukesh Das</td>
+              <td>2301292520</td>
+              <td>Abdul Rahim Khan</td>
+              <td>2301292480</td>
+            </tr>
+            
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="result-card">
+      <img src="" alt="">
+      <h3>Run the Key</h3>
+      <button class="dropdown-btn" onclick="toggleDropdown(this)">Show Table</button>
+      <div class="dropdown-content">
+        <table>
+          <thead>
+            <tr>
+              <th>Priliminary Round</th>
+              <th>Resistration No</th>
+              <th>Final Round</th>
+              <th>Resistration No</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Mukesh Das</td>
+              <td>2301292520</td>
+              <td>Abdul Rahim Khan</td>
+              <td>2301292480</td>
+            </tr>
+            <tr>
+              <td>Abdul Rahim Khan</td>
+              <td>56789567845</td>
+              <td>Mukesh Das</td>
+              <td>123456789</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="result-card">
+      <img src="" alt="">
+      <h3>Code Sprint</h3>
+      <button class="dropdown-btn" onclick="toggleDropdown(this)">Show Table</button>
+      <div class="dropdown-content">
+        <table>
+          <thead>
+            <tr>
+              <th>Priliminary Round</th>
+              <th>Resistration No</th>
+              <th>Final Round</th>
+              <th>Resistration No</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>John Doe</td>
+              <td>4567891234</td>
+              <td>Jane Smith</td>
+              <td>123456789</td>
+            </tr>
+             <tr>
+              <td>Mukesh Das</td>
+              <td>2301292520</td>
+              <td>Abdul Rahim Khan</td>
+              <td>2301292480</td>
+            </tr>
+            
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="result-card">
+      <img src="" alt="">
+      <h3>Run the Key</h3>
+      <button class="dropdown-btn" onclick="toggleDropdown(this)">Show Table</button>
+      <div class="dropdown-content">
+        <table>
+          <thead>
+            <tr>
+              <th>Priliminary Round</th>
+              <th>Resistration No</th>
+              <th>Final Round</th>
+              <th>Resistration No</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Mukesh Das</td>
+              <td>2301292520</td>
+              <td>Abdul Rahim Khan</td>
+              <td>2301292480</td>
+            </tr>
+            <tr>
+              <td>Abdul Rahim Khan</td>
+              <td>56789567845</td>
+              <td>Mukesh Das</td>
+              <td>123456789</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="result-card">
+      <img src="" alt="">
+      <h3>Code Sprint</h3>
+      <button class="dropdown-btn" onclick="toggleDropdown(this)">Show Table</button>
+      <div class="dropdown-content">
+        <table>
+          <thead>
+            <tr>
+              <th>Priliminary Round</th>
+              <th>Resistration No</th>
+              <th>Final Round</th>
+              <th>Resistration No</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>John Doe</td>
+              <td>4567891234</td>
+              <td>Jane Smith</td>
+              <td>123456789</td>
+            </tr>
+             <tr>
+              <td>Mukesh Das</td>
+              <td>2301292520</td>
+              <td>Abdul Rahim Khan</td>
+              <td>2301292480</td>
+            </tr>
+            
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="result-card">
+      <img src="" alt="">
+      <h3>Run the Key</h3>
+      <button class="dropdown-btn" onclick="toggleDropdown(this)">Show Table</button>
+      <div class="dropdown-content">
+        <table>
+          <thead>
+            <tr>
+              <th>Priliminary Round</th>
+              <th>Resistration No</th>
+              <th>Final Round</th>
+              <th>Resistration No</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Mukesh Das</td>
+              <td>2301292520</td>
+              <td>Abdul Rahim Khan</td>
+              <td>2301292480</td>
+            </tr>
+            <tr>
+              <td>Abdul Rahim Khan</td>
+              <td>56789567845</td>
+              <td>Mukesh Das</td>
+              <td>123456789</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="result-card">
+      <img src="" alt="">
+      <h3>Code Sprint</h3>
+      <button class="dropdown-btn" onclick="toggleDropdown(this)">Show Table</button>
+      <div class="dropdown-content">
+        <table>
+          <thead>
+            <tr>
+              <th>Priliminary Round</th>
+              <th>Resistration No</th>
+              <th>Final Round</th>
+              <th>Resistration No</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>John Doe</td>
+              <td>4567891234</td>
+              <td>Jane Smith</td>
+              <td>123456789</td>
+            </tr>
+             <tr>
+              <td>Mukesh Das</td>
+              <td>2301292520</td>
+              <td>Abdul Rahim Khan</td>
+              <td>2301292480</td>
+            </tr>
+            
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="result-card">
+      <img src="" alt="">
+      <h3>Run the Key</h3>
+      <button class="dropdown-btn" onclick="toggleDropdown(this)">Show Table</button>
+      <div class="dropdown-content">
+        <table>
+          <thead>
+            <tr>
+              <th>Priliminary Round</th>
+              <th>Resistration No</th>
+              <th>Final Round</th>
+              <th>Resistration No</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Mukesh Das</td>
+              <td>2301292520</td>
+              <td>Abdul Rahim Khan</td>
+              <td>2301292480</td>
+            </tr>
+            <tr>
+              <td>Abdul Rahim Khan</td>
+              <td>56789567845</td>
+              <td>Mukesh Das</td>
+              <td>123456789</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="result-card">
+      <img src="" alt="">
+      <h3>Code Sprint</h3>
+      <button class="dropdown-btn" onclick="toggleDropdown(this)">Show Table</button>
+      <div class="dropdown-content">
+        <table>
+          <thead>
+            <tr>
+              <th>Priliminary Round</th>
+              <th>Resistration No</th>
+              <th>Final Round</th>
+              <th>Resistration No</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>John Doe</td>
+              <td>4567891234</td>
+              <td>Jane Smith</td>
+              <td>123456789</td>
+            </tr>
+             <tr>
+              <td>Mukesh Das</td>
+              <td>2301292520</td>
+              <td>Abdul Rahim Khan</td>
+              <td>2301292480</td>
+            </tr>
+            
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="result-card">
+      <img src="" alt="">
+      <h3>Run the Key</h3>
+      <button class="dropdown-btn" onclick="toggleDropdown(this)">Show Table</button>
+      <div class="dropdown-content">
+        <table>
+          <thead>
+            <tr>
+              <th>Priliminary Round</th>
+              <th>Resistration No</th>
+              <th>Final Round</th>
+              <th>Resistration No</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Mukesh Das</td>
+              <td>2301292520</td>
+              <td>Abdul Rahim Khan</td>
+              <td>2301292480</td>
+            </tr>
+            <tr>
+              <td>Abdul Rahim Khan</td>
+              <td>56789567845</td>
+              <td>Mukesh Das</td>
+              <td>123456789</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="result-card">
+      <img src="" alt="">
+      <h3>Code Sprint</h3>
+      <button class="dropdown-btn" onclick="toggleDropdown(this)">Show Table</button>
+      <div class="dropdown-content">
+        <table>
+          <thead>
+            <tr>
+              <th>Priliminary Round</th>
+              <th>Resistration No</th>
+              <th>Final Round</th>
+              <th>Resistration No</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>John Doe</td>
+              <td>4567891234</td>
+              <td>Jane Smith</td>
+              <td>123456789</td>
+            </tr>
+             <tr>
+              <td>Mukesh Das</td>
+              <td>2301292520</td>
+              <td>Abdul Rahim Khan</td>
+              <td>2301292480</td>
+            </tr>
+            
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="result-card">
+      <img src="" alt="">
+      <h3>Run the Key</h3>
+      <button class="dropdown-btn" onclick="toggleDropdown(this)">Show Table</button>
+      <div class="dropdown-content">
+        <table>
+          <thead>
+            <tr>
+              <th>Priliminary Round</th>
+              <th>Resistration No</th>
+              <th>Final Round</th>
+              <th>Resistration No</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Mukesh Das</td>
+              <td>2301292520</td>
+              <td>Abdul Rahim Khan</td>
+              <td>2301292480</td>
+            </tr>
+            <tr>
+              <td>Abdul Rahim Khan</td>
+              <td>56789567845</td>
+              <td>Mukesh Das</td>
+              <td>123456789</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="result-card">
+      <img src="" alt="">
+      <h3>Code Sprint</h3>
+      <button class="dropdown-btn" onclick="toggleDropdown(this)">Show Table</button>
+      <div class="dropdown-content">
+        <table>
+          <thead>
+            <tr>
+              <th>Priliminary Round</th>
+              <th>Resistration No</th>
+              <th>Final Round</th>
+              <th>Resistration No</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>John Doe</td>
+              <td>4567891234</td>
+              <td>Jane Smith</td>
+              <td>123456789</td>
+            </tr>
+             <tr>
+              <td>Mukesh Das</td>
+              <td>2301292520</td>
+              <td>Abdul Rahim Khan</td>
+              <td>2301292480</td>
+            </tr>
+            
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="result-card">
+      <img src="" alt="">
+      <h3>Run the Key</h3>
+      <button class="dropdown-btn" onclick="toggleDropdown(this)">Show Table</button>
+      <div class="dropdown-content">
+        <table>
+          <thead>
+            <tr>
+              <th>Priliminary Round</th>
+              <th>Resistration No</th>
+              <th>Final Round</th>
+              <th>Resistration No</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Mukesh Das</td>
+              <td>2301292520</td>
+              <td>Abdul Rahim Khan</td>
+              <td>2301292480</td>
+            </tr>
+            <tr>
+              <td>Abdul Rahim Khan</td>
+              <td>56789567845</td>
+              <td>Mukesh Das</td>
+              <td>123456789</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="result-card">
+      <img src="" alt="">
+      <h3>Code Sprint</h3>
+      <button class="dropdown-btn" onclick="toggleDropdown(this)">Show Table</button>
+      <div class="dropdown-content">
+        <table>
+          <thead>
+            <tr>
+              <th>Priliminary Round</th>
+              <th>Resistration No</th>
+              <th>Final Round</th>
+              <th>Resistration No</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>John Doe</td>
+              <td>4567891234</td>
+              <td>Jane Smith</td>
+              <td>123456789</td>
+            </tr>
+             <tr>
+              <td>Mukesh Das</td>
+              <td>2301292520</td>
+              <td>Abdul Rahim Khan</td>
+              <td>2301292480</td>
+            </tr>
+            
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="result-card">
+      <img src="" alt="">
+      <h3>Run the Key</h3>
+      <button class="dropdown-btn" onclick="toggleDropdown(this)">Show Table</button>
+      <div class="dropdown-content">
+        <table>
+          <thead>
+            <tr>
+              <th>Priliminary Round</th>
+              <th>Resistration No</th>
+              <th>Final Round</th>
+              <th>Resistration No</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Mukesh Das</td>
+              <td>2301292520</td>
+              <td>Abdul Rahim Khan</td>
+              <td>2301292480</td>
+            </tr>
+            <tr>
+              <td>Abdul Rahim Khan</td>
+              <td>56789567845</td>
+              <td>Mukesh Das</td>
+              <td>123456789</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="result-card">
+      <img src="" alt="">
+      <h3>Code Sprint</h3>
+      <button class="dropdown-btn" onclick="toggleDropdown(this)">Show Table</button>
+      <div class="dropdown-content">
+        <table>
+          <thead>
+            <tr>
+              <th>Priliminary Round</th>
+              <th>Resistration No</th>
+              <th>Final Round</th>
+              <th>Resistration No</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>John Doe</td>
+              <td>4567891234</td>
+              <td>Jane Smith</td>
+              <td>123456789</td>
+            </tr>
+             <tr>
+              <td>Mukesh Das</td>
+              <td>2301292520</td>
+              <td>Abdul Rahim Khan</td>
+              <td>2301292480</td>
+            </tr>
+            
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="result-card">
+      <img src="" alt="">
+      <h3>Run the Key</h3>
+      <button class="dropdown-btn" onclick="toggleDropdown(this)">Show Table</button>
+      <div class="dropdown-content">
+        <table>
+          <thead>
+            <tr>
+              <th>Priliminary Round</th>
+              <th>Resistration No</th>
+              <th>Final Round</th>
+              <th>Resistration No</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Mukesh Das</td>
+              <td>2301292520</td>
+              <td>Abdul Rahim Khan</td>
+              <td>2301292480</td>
+            </tr>
+            <tr>
+              <td>Abdul Rahim Khan</td>
+              <td>56789567845</td>
+              <td>Mukesh Das</td>
+              <td>123456789</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="result-card">
+      <img src="" alt="">
+      <h3>Code Sprint</h3>
+      <button class="dropdown-btn" onclick="toggleDropdown(this)">Show Table</button>
+      <div class="dropdown-content">
+        <table>
+          <thead>
+            <tr>
+              <th>Priliminary Round</th>
+              <th>Resistration No</th>
+              <th>Final Round</th>
+              <th>Resistration No</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>John Doe</td>
+              <td>4567891234</td>
+              <td>Jane Smith</td>
+              <td>123456789</td>
+            </tr>
+             <tr>
+              <td>Mukesh Das</td>
+              <td>2301292520</td>
+              <td>Abdul Rahim Khan</td>
+              <td>2301292480</td>
+            </tr>
+            
+          </tbody>
+        </table>
+      </div>
+    </div>
+   
+    <!-- Add more result-cards as needed -->
+  </section>
+
+  <script>
+    // Toggle Dropdown Function
+    function toggleDropdown(button) {
+      const dropdown = button.nextElementSibling;
+      dropdown.style.display = dropdown.style.display === "block" ? "none" : "block";
+    }
+
+    // Search Results Function
+    function searchResults() {
+      const input = document.getElementById('search-input').value.toLowerCase();
+      const resultCards = document.getElementsByClassName('result-card');
+      
+      for (let i = 0; i < resultCards.length; i++) {
+        const cardTitle = resultCards[i].getElementsByTagName('h3')[0].textContent.toLowerCase();
+        
+        if (cardTitle.includes(input)) {
+          resultCards[i].style.display = "block";
+        } else {
+          resultCards[i].style.display = "none";
+        }
+      }
+    }
+  </script>
+
+</body>
+</html>

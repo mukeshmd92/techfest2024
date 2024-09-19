@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechFest - Events</title>
+    <style>
+        /* Basic Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* Navbar Styles */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: #333;  
+            padding: 10px ;
+            z-index: 100;
+        }
+
+        .navbar ul {
+            list-style-type: none;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+
+        .navbar ul li {
+            margin: 0 20px;
+        }
+
+        .navbar ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+            transition: color 0.3s ease-in-out;
+        }
+
+        .navbar ul li a:hover {
+            color: #ff6347; /* Accent color */
+        }
+
+        .logo {
+            height: 50px;
+        }
+
+        /* Trophy Animation Section */
+        .trophy-animation {
+            margin-top: 100px;
+            text-align: center;
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        .trophy-animation img {
+            height: 150px;
+            width: auto;
+            animation: bounce 3s infinite;
+        }
+
+        /* Keyframe Animation for Trophy */
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Search Bar Styles */
+        .search-bar {
+            margin: 20px auto;
+            text-align: center;
+        }
+
+        .search-bar input[type="text"] {
+            width: 60%;
+            padding: 10px;
+            border-radius: 20px;
+            border: 2px solid #333;
+            font-size: 1.2rem;
+            transition: border-color 0.3s ease-in-out;
+        }
+
+        .search-bar input[type="text"]:focus {
+            border-color: #ff6347;
+            outline: none;
+        }
+
+        /* Event Cards Section */
+        .event-cards {
+            display: flex;
+           flex-wrap: wrap;
+            justify-content: space-around;
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        .event-card {
+            background-color: #fff;
+            width: 250px;
+            margin: 15px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .event-card:hover {
+            transform: scale(1.05);
+        }
+
+        .event-card img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+        }
+
+        .event-card h3 {
+            margin: 10px;
+            font-size: 1.5rem;
+            color: #333;
+            text-align: center;
+        }
+
+        .event-card p {
+            margin: 10px;
+            font-size: 1rem;
+            text-align: center;
+            color: #666;
+        }
+
+        /* Button Styles */
+        button {
+            display: block;
+            width: 80%;
+            margin: 10px auto;
+            padding: 10px;
+            border-radius: 20px;
+            background-color: #ff6347;
+            color: white;
+            border: none;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease-in-out;
+        }
+
+        button:hover {
+            background-color: #ff4500;
+        }
+
+        /* Dropdown Styles */
+        .dropdown {
+            position: relative;
+            display: block;
+            width: 100%;
+            text-align: center;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: relative;
+            background-color: #fff;
+            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-top: 10px;
+            width: 100%;
+            border-radius: 10px;
+            z-index: 1;
+            color: #333;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-in-out, padding 0.3s ease-in-out;
+        }
+
+        .dropdown-content h3, .dropdown-content h4 {
+            margin: 5px 0;
+        }
+
+        .dropdown.active .dropdown-content {
+            display: block;
+            max-height: 500px;
+            padding: 20px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .navbar ul {
+                flex-direction: column;
+            }
+
+            .event-cards {
+                justify-content: center;
+            }
+
+            .search-bar input[type="text"] {
+                width: 90%;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- Top Fixed Navbar -->
+    <header class="navbar">
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="events.html">Events</a></li>
+                <img src="./techlogo-removebg-preview.png" alt="TechFest Logo" class="logo">
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Trophy Animation -->
+    <div class="trophy-animation">
+        <img src="./trophy.png" alt="Trophy Animation">
+    </div>
+
+    <!-- Search Bar -->
+    <div class="search-bar">
+        <input type="text" id="search-input" onkeyup="searchEvents()" placeholder="Search for an event...">
+    </div>
+
+    <!-- Event Cards -->
+    <section class="event-cards" id="event-cards">
+        <div class="event-card">
+            <img src="event1.jpg" alt="Run The Key">
+            <h3>Run The Key</h3>
+
+            <!-- Dropdown Button -->
+            <div class="dropdown">
+                <button class="dropbtn" onclick="toggleDropdown(this)">Explore</button>
+                <div class="dropdown-content">
+                    <h3>Teacher Coordinator</h3>
+                    <h4>Mr. Sukumar Mohanty</h4>
+                    <hr>
+                    <h3>Student Coordinators</h3>
+                    <h4>Piyush Das</h4>
+                    <h4>Ranjit Das</h4>
+                    <hr>
+                    <div>
+                        <h5>Event Category: Technical Event</h5>
+                        <h5>Event Type: Individual</h5>
+                        <h5>Venue: Room No-2.04</h5>
+                        <h5>Date: 09-02-2024</h5>
+                        <h5>Time: 9am</h5>
+                    </div>
+                </div>
+            </div>
+            <button class="enroll-btn">Enroll</button>
+        </div>
+
+        <div class="event-card">
+            <img src="event1.jpg" alt="Miku">
+            <h3>Miku</h3>
+
+            <!-- Dropdown Button -->
+            <div class="dropdown">
+                <button class="dropbtn" onclick="toggleDropdown(this)">Explore</button>
+                <div class="dropdown-content">
+                    <h3>Teacher Coordinator</h3>
+                    <h4>Mr. Sukumar Mohanty</h4>
+                    <hr>
+                    <h3>Student Coordinators</h3>
+                    <h4>Piyush Das</h4>
+                    <h4>Ranjit Das</h4>
+                    <hr>
+                    <div>
+                        <h5>Event Category: Technical Event</h5>
+                        <h5>Event Type: Individual</h5>
+                        <h5>Venue: Room No-2.04</h5>
+                        <h5>Date: 09-02-2024</h5>
+                        <h5>Time: 9am</h5>
+                    </div>
+                </div>
+            </div>
+            <button class="enroll-btn">Enroll</button>
+        </div>
+        <div class="event-card">
+            <img src="event1.jpg" alt="Run The Key">
+            <h3>Run The Key</h3>
+
+            <!-- Dropdown Button -->
+            <div class="dropdown">
+                <button class="dropbtn" onclick="toggleDropdown(this)">Explore</button>
+                <div class="dropdown-content">
+                    <h3>Teacher Coordinator</h3>
+                    <h4>Mr. Sukumar Mohanty</h4>
+                    <hr>
+                    <h3>Student Coordinators</h3>
+                    <h4>Piyush Das</h4>
+                    <h4>Ranjit Das</h4>
+                    <hr>
+                    <div>
+                        <h5>Event Category: Technical Event</h5>
+                        <h5>Event Type: Individual</h5>
+                        <h5>Venue: Room No-2.04</h5>
+                        <h5>Date: 09-02-2024</h5>
+                        <h5>Time: 9am</h5>
+                    </div>
+                </div>
+            </div>
+            <button class="enroll-btn">Enroll</button>
+        </div>
+
+        <div class="event-card">
+            <img src="event1.jpg" alt="Miku">
+            <h3>Miku</h3>
+
+            <!-- Dropdown Button -->
+            <div class="dropdown">
+                <button class="dropbtn" onclick="toggleDropdown(this)">Explore</button>
+                <div class="dropdown-content">
+                    <h3>Teacher Coordinator</h3>
+                    <h4>Mr. Sukumar Mohanty</h4>
+                    <hr>
+                    <h3>Student Coordinators</h3>
+                    <h4>Piyush Das</h4>
+                    <h4>Ranjit Das</h4>
+                    <hr>
+                    <div>
+                        <h5>Event Category: Technical Event</h5>
+                        <h5>Event Type: Individual</h5>
+                        <h5>Venue: Room No-2.04</h5>
+                        <h5>Date: 09-02-2024</h5>
+                        <h5>Time: 9am</h5>
+                    </div>
+                </div>
+            </div>
+            <button class="enroll-btn">Enroll</button>
+        </div>
+
+        <div class="event-card">
+            <img src="event1.jpg" alt="Run The Key">
+            <h3>Run The Key</h3>
+
+            <!-- Dropdown Button -->
+            <div class="dropdown">
+                <button class="dropbtn" onclick="toggleDropdown(this)">Explore</button>
+                <div class="dropdown-content">
+                    <h3>Teacher Coordinator</h3>
+                    <h4>Mr. Sukumar Mohanty</h4>
+                    <hr>
+                    <h3>Student Coordinators</h3>
+                    <h4>Piyush Das</h4>
+                    <h4>Ranjit Das</h4>
+                    <hr>
+                    <div>
+                        <h5>Event Category: Technical Event</h5>
+                        <h5>Event Type: Individual</h5>
+                        <h5>Venue: Room No-2.04</h5>
+                        <h5>Date: 09-02-2024</h5>
+                        <h5>Time: 9am</h5>
+                    </div>
+                </div>
+            </div>
+            <button class="enroll-btn">Enroll</button>
+        </div>
+
+        <div class="event-card">
+            <img src="event1.jpg" alt="Miku">
+            <h3>Miku</h3>
+
+            <!-- Dropdown Button -->
+            <div class="dropdown">
+                <button class="dropbtn" onclick="toggleDropdown(this)">Explore</button>
+                <div class="dropdown-content">
+                    <h3>Teacher Coordinator</h3>
+                    <h4>Mr. Sukumar Mohanty</h4>
+                    <hr>
+                    <h3>Student Coordinators</h3>
+                    <h4>Piyush Das</h4>
+                    <h4>Ranjit Das</h4>
+                    <hr>
+                    <div>
+                        <h5>Event Category: Technical Event</h5>
+                        <h5>Event Type: Individual</h5>
+                        <h5>Venue: Room No-2.04</h5>
+                        <h5>Date: 09-02-2024</h5>
+                        <h5>Time: 9am</h5>
+                    </div>
+                </div>
+            </div>
+            <button class="enroll-btn">Enroll</button>
+        </div>
+
+        <div class="event-card">
+            <img src="event1.jpg" alt="Run The Key">
+            <h3>Run The Key</h3>
+
+            <!-- Dropdown Button -->
+            <div class="dropdown">
+                <button class="dropbtn" onclick="toggleDropdown(this)">Explore</button>
+                <div class="dropdown-content">
+                    <h3>Teacher Coordinator</h3>
+                    <h4>Mr. Sukumar Mohanty</h4>
+                    <hr>
+                    <h3>Student Coordinators</h3>
+                    <h4>Piyush Das</h4>
+                    <h4>Ranjit Das</h4>
+                    <hr>
+                    <div>
+                        <h5>Event Category: Technical Event</h5>
+                        <h5>Event Type: Individual</h5>
+                        <h5>Venue: Room No-2.04</h5>
+                        <h5>Date: 09-02-2024</h5>
+                        <h5>Time: 9am</h5>
+                    </div>
+                </div>
+            </div>
+            <button class="enroll-btn">Enroll</button>
+        </div>
+
+        <div class="event-card">
+            <img src="event1.jpg" alt="Miku">
+            <h3>Miku</h3>
+
+            <!-- Dropdown Button -->
+            <div class="dropdown">
+                <button class="dropbtn" onclick="toggleDropdown(this)">Explore</button>
+                <div class="dropdown-content">
+                    <h3>Teacher Coordinator</h3>
+                    <h4>Mr. Sukumar Mohanty</h4>
+                    <hr>
+                    <h3>Student Coordinators</h3>
+                    <h4>Piyush Das</h4>
+                    <h4>Ranjit Das</h4>
+                    <hr>
+                    <div>
+                        <h5>Event Category: Technical Event</h5>
+                        <h5>Event Type: Individual</h5>
+                        <h5>Venue: Room No-2.04</h5>
+                        <h5>Date: 09-02-2024</h5>
+                        <h5>Time: 9am</h5>
+                    </div>
+                </div>
+            </div>
+            <button class="enroll-btn">Enroll</button>
+        </div>
+        <div class="event-card">
+            <img src="event1.jpg" alt="Run The Key">
+            <h3>Run The Key</h3>
+
+            <!-- Dropdown Button -->
+            <div class="dropdown">
+                <button class="dropbtn" onclick="toggleDropdown(this)">Explore</button>
+                <div class="dropdown-content">
+                    <h3>Teacher Coordinator</h3>
+                    <h4>Mr. Sukumar Mohanty</h4>
+                    <hr>
+                    <h3>Student Coordinators</h3>
+                    <h4>Piyush Das</h4>
+                    <h4>Ranjit Das</h4>
+                    <hr>
+                    <div>
+                        <h5>Event Category: Technical Event</h5>
+                        <h5>Event Type: Individual</h5>
+                        <h5>Venue: Room No-2.04</h5>
+                        <h5>Date: 09-02-2024</h5>
+                        <h5>Time: 9am</h5>
+                    </div>
+                </div>
+            </div>
+            <button class="enroll-btn">Enroll</button>
+        </div>
+
+        <div class="event-card">
+            <img src="event1.jpg" alt="Miku">
+            <h3>Miku</h3>
+
+            <!-- Dropdown Button -->
+            <div class="dropdown">
+                <button class="dropbtn" onclick="toggleDropdown(this)">Explore</button>
+                <div class="dropdown-content">
+                    <h3>Teacher Coordinator</h3>
+                    <h4>Mr. Sukumar Mohanty</h4>
+                    <hr>
+                    <h3>Student Coordinators</h3>
+                    <h4>Piyush Das</h4>
+                    <h4>Ranjit Das</h4>
+                    <hr>
+                    <div>
+                        <h5>Event Category: Technical Event</h5>
+                        <h5>Event Type: Individual</h5>
+                        <h5>Venue: Room No-2.04</h5>
+                        <h5>Date: 09-02-2024</h5>
+                        <h5>Time: 9am</h5>
+                    </div>
+                </div>
+            </div>
+            <button class="enroll-btn">Enroll</button>
+        </div>
+
+        <div class="event-card">
+            <img src="event1.jpg" alt="Run The Key">
+            <h3>Run The Key</h3>
+
+            <!-- Dropdown Button -->
+            <div class="dropdown">
+                <button class="dropbtn" onclick="toggleDropdown(this)">Explore</button>
+                <div class="dropdown-content">
+                    <h3>Teacher Coordinator</h3>
+                    <h4>Mr. Sukumar Mohanty</h4>
+                    <hr>
+                    <h3>Student Coordinators</h3>
+                    <h4>Piyush Das</h4>
+                    <h4>Ranjit Das</h4>
+                    <hr>
+                    <div>
+                        <h5>Event Category: Technical Event</h5>
+                        <h5>Event Type: Individual</h5>
+                        <h5>Venue: Room No-2.04</h5>
+                        <h5>Date: 09-02-2024</h5>
+                        <h5>Time: 9am</h5>
+                    </div>
+                </div>
+            </div>
+            <button class="enroll-btn">Enroll</button>
+        </div>
+
+        <div class="event-card">
+            <img src="event1.jpg" alt="Miku">
+            <h3>Miku</h3>
+
+            <!-- Dropdown Button -->
+            <div class="dropdown">
+                <button class="dropbtn" onclick="toggleDropdown(this)">Explore</button>
+                <div class="dropdown-content">
+                    <h3>Teacher Coordinator</h3>
+                    <h4>Mr. Sukumar Mohanty</h4>
+                    <hr>
+                    <h3>Student Coordinators</h3>
+                    <h4>Piyush Das</h4>
+                    <h4>Ranjit Das</h4>
+                    <hr>
+                    <div>
+                        <h5>Event Category: Technical Event</h5>
+                        <h5>Event Type: Individual</h5>
+                        <h5>Venue: Room No-2.04</h5>
+                        <h5>Date: 09-02-2024</h5>
+                        <h5>Time: 9am</h5>
+                    </div>
+                </div>
+            </div>
+            <button class="enroll-btn">Enroll</button>
+        </div>
+
+        <div class="event-card">
+            <img src="event1.jpg" alt="Run The Key">
+            <h3>Run The Key</h3>
+
+            <!-- Dropdown Button -->
+            <div class="dropdown">
+                <button class="dropbtn" onclick="toggleDropdown(this)">Explore</button>
+                <div class="dropdown-content">
+                    <h3>Teacher Coordinator</h3>
+                    <h4>Mr. Sukumar Mohanty</h4>
+                    <hr>
+                    <h3>Student Coordinators</h3>
+                    <h4>Piyush Das</h4>
+                    <h4>Ranjit Das</h4>
+                    <hr>
+                    <div>
+                        <h5>Event Category: Technical Event</h5>
+                        <h5>Event Type: Individual</h5>
+                        <h5>Venue: Room No-2.04</h5>
+                        <h5>Date: 09-02-2024</h5>
+                        <h5>Time: 9am</h5>
+                    </div>
+                </div>
+            </div>
+            <button class="enroll-btn">Enroll</button>
+        </div>
+
+        <div class="event-card">
+            <img src="event1.jpg" alt="Miku">
+            <h3>Miku</h3>
+
+            <!-- Dropdown Button -->
+            <div class="dropdown">
+                <button class="dropbtn" onclick="toggleDropdown(this)">Explore</button>
+                <div class="dropdown-content">
+                    <h3>Teacher Coordinator</h3>
+                    <h4>Mr. Sukumar Mohanty</h4>
+                    <hr>
+                    <h3>Student Coordinators</h3>
+                    <h4>Piyush Das</h4>
+                    <h4>Ranjit Das</h4>
+                    <hr>
+                    <div>
+                        <h5>Event Category: Technical Event</h5>
+                        <h5>Event Type: Individual</h5>
+                        <h5>Venue: Room No-2.04</h5>
+                        <h5>Date: 09-02-2024</h5>
+                        <h5>Time: 9am</h5>
+                    </div>
+                </div>
+            </div>
+            <button class="enroll-btn">Enroll</button>
+        </div>
+
+        <div class="event-card">
+            <img src="event1.jpg" alt="Run The Key">
+            <h3>Run The Key</h3>
+
+            <!-- Dropdown Button -->
+            <div class="dropdown">
+                <button class="dropbtn" onclick="toggleDropdown(this)">Explore</button>
+                <div class="dropdown-content">
+                    <h3>Teacher Coordinator</h3>
+                    <h4>Mr. Sukumar Mohanty</h4>
+                    <hr>
+                    <h3>Student Coordinators</h3>
+                    <h4>Piyush Das</h4>
+                    <h4>Ranjit Das</h4>
+                    <hr>
+                    <div>
+                        <h5>Event Category: Technical Event</h5>
+                        <h5>Event Type: Individual</h5>
+                        <h5>Venue: Room No-2.04</h5>
+                        <h5>Date: 09-02-2024</h5>
+                        <h5>Time: 9am</h5>
+                    </div>
+                </div>
+            </div>
+            <button class="enroll-btn">Enroll</button>
+        </div>
+
+        <div class="event-card">
+            <img src="event1.jpg" alt="Miku">
+            <h3>Miku</h3>
+
+            <!-- Dropdown Button -->
+            <div class="dropdown">
+                <button class="dropbtn" onclick="toggleDropdown(this)">Explore</button>
+                <div class="dropdown-content">
+                    <h3>Teacher Coordinator</h3>
+                    <h4>Mr. Sukumar Mohanty</h4>
+                    <hr>
+                    <h3>Student Coordinators</h3>
+                    <h4>Piyush Das</h4>
+                    <h4>Ranjit Das</h4>
+                    <hr>
+                    <div>
+                        <h5>Event Category: Technical Event</h5>
+                        <h5>Event Type: Individual</h5>
+                        <h5>Venue: Room No-2.04</h5>
+                        <h5>Date: 09-02-2024</h5>
+                        <h5>Time: 9am</h5>
+                    </div>
+                </div>
+            </div>
+            <button class="enroll-btn">Enroll</button>
+        </div>
+
+        <div class="event-card">
+            <img src="event1.jpg" alt="Run The Key">
+            <h3>Run The Key</h3>
+
+            <!-- Dropdown Button -->
+            <div class="dropdown">
+                <button class="dropbtn" onclick="toggleDropdown(this)">Explore</button>
+                <div class="dropdown-content">
+                    <h3>Teacher Coordinator</h3>
+                    <h4>Mr. Sukumar Mohanty</h4>
+                    <hr>
+                    <h3>Student Coordinators</h3>
+                    <h4>Piyush Das</h4>
+                    <h4>Ranjit Das</h4>
+                    <hr>
+                    <div>
+                        <h5>Event Category: Technical Event</h5>
+                        <h5>Event Type: Individual</h5>
+                        <h5>Venue: Room No-2.04</h5>
+                        <h5>Date: 09-02-2024</h5>
+                        <h5>Time: 9am</h5>
+                    </div>
+                </div>
+            </div>
+            <button class="enroll-btn">Enroll</button>
+        </div>
+
+        <div class="event-card">
+            <img src="event1.jpg" alt="Miku">
+            <h3>Miku</h3>
+
+            <!-- Dropdown Button -->
+            <div class="dropdown">
+                <button class="dropbtn" onclick="toggleDropdown(this)">Explore</button>
+                <div class="dropdown-content">
+                    <h3>Teacher Coordinator</h3>
+                    <h4>Mr. Sukumar Mohanty</h4>
+                    <hr>
+                    <h3>Student Coordinators</h3>
+                    <h4>Piyush Das</h4>
+                    <h4>Ranjit Das</h4>
+                    <hr>
+                    <div>
+                        <h5>Event Category: Technical Event</h5>
+                        <h5>Event Type: Individual</h5>
+                        <h5>Venue: Room No-2.04</h5>
+                        <h5>Date: 09-02-2024</h5>
+                        <h5>Time: 9am</h5>
+                    </div>
+                </div>
+            </div>
+            <button class="enroll-btn">Enroll</button>
+        </div>
+
+        <div class="event-card">
+            <img src="event1.jpg" alt="Run The Key">
+            <h3>Run The Key</h3>
+
+            <!-- Dropdown Button -->
+            <div class="dropdown">
+                <button class="dropbtn" onclick="toggleDropdown(this)">Explore</button>
+                <div class="dropdown-content">
+                    <h3>Teacher Coordinator</h3>
+                    <h4>Mr. Sukumar Mohanty</h4>
+                    <hr>
+                    <h3>Student Coordinators</h3>
+                    <h4>Piyush Das</h4>
+                    <h4>Ranjit Das</h4>
+                    <hr>
+                    <div>
+                        <h5>Event Category: Technical Event</h5>
+                        <h5>Event Type: Individual</h5>
+                        <h5>Venue: Room No-2.04</h5>
+                        <h5>Date: 09-02-2024</h5>
+                        <h5>Time: 9am</h5>
+                    </div>
+                </div>
+            </div>
+            <button class="enroll-btn">Enroll</button>
+        </div>
+
+        <div class="event-card">
+            <img src="event1.jpg" alt="Miku">
+            <h3>Miku</h3>
+
+            <!-- Dropdown Button -->
+            <div class="dropdown">
+                <button class="dropbtn" onclick="toggleDropdown(this)">Explore</button>
+                <div class="dropdown-content">
+                    <h3>Teacher Coordinator</h3>
+                    <h4>Mr. Sukumar Mohanty</h4>
+                    <hr>
+                    <h3>Student Coordinators</h3>
+                    <h4>Piyush Das</h4>
+                    <h4>Ranjit Das</h4>
+                    <hr>
+                    <div>
+                        <h5>Event Category: Technical Event</h5>
+                        <h5>Event Type: Individual</h5>
+                        <h5>Venue: Room No-2.04</h5>
+                        <h5>Date: 09-02-2024</h5>
+                        <h5>Time: 9am</h5>
+                    </div>
+                </div>
+            </div>
+            <button class="enroll-btn">Enroll</button>
+        </div>
+
+
+        
+    </section>
+
+    <script>
+        function toggleDropdown(element) {
+            const allDropdowns = document.querySelectorAll('.dropdown');
+            allDropdowns.forEach(dropdown => {
+                if (dropdown !== element.parentElement) {
+                    dropdown.classList.remove('active');
+                }
+            });
+
+            const dropdown = element.parentElement;
+            dropdown.classList.toggle('active');
+        }
+
+        function searchEvents() {
+            const input = document.getElementById('search-input');
+            const filter = input.value.toLowerCase();
+            const eventCards = document.getElementsByClassName('event-card');
+            
+            for (let i = 0; i < eventCards.length; i++) {
+                const eventTitle = eventCards[i].getElementsByTagName('h3')[0];
+                const txtValue = eventTitle.textContent || eventTitle.innerText;
+                if (txtValue.toLowerCase().indexOf(filter) > -1) {
+                    eventCards[i].style.display = "";
+                } else {
+                    eventCards[i].style.display = "none";
+                }
+            }
+        }
+    </script>
+
+</body>
+</html>
